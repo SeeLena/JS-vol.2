@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+    <header class="header">
+        <a class="header__home-ic" href="#"><i class="fas fa-home"></i></a>
+        <div class="header__basket-box">
+            <form action="#" class="search__form"  @submit.prevent="filter" >
+                <input type="search" class="search__field" v-model="userSearch" >
+                <button class="search__btn" type="">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <div class="header__btn-cart" @click="show = !show"><i class="fas fa-shopping-basket"></i></div>
+            <div class="basket" v-show = "show">
+                <p v-if="!basketItems.length" class="basket__empty">Cart is empty</p>
+                <div class="basket__item" v-for="item of basketItems" :key="item.id_product">
+                    <img :src="imgCatalog" alt="Some image" class="basket__product_img">
+                    <div class="basket__product_bio">
+                        <div class="basket__product_desc">
+                            <p class="basket__product_title">{{ item.product_name }}</p>
+                            <p class="basket__product_quantity">Количество: {{ item.quantity }}</p>
+                            <p class="basket__product_price">{{ item.quantity * item.price }} $</p>
+                        </div>
+                    </div>
+                    <div class="basket__right">
+                        <button class="del-btn" @click="remove(item)">&times;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="products">
+            <a href="#" class="products__item" v-for="product of filtered" :key="product.id_product">
+                <img class="products__img" :src="imgCatalog">
+                <h3 class="products__heading">{{ product.product_name }}</h3>
+                <p class="products__price">{{ product.price }} $</p>
+                <button class="products__buy-btn" @click="addBasket(product)">Купить</button>
+            </a>`
+        </div>
+    </main>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/main.js"></script>
+    
+</body>
+</html>
